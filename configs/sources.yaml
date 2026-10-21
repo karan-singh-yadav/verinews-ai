@@ -1,0 +1,32 @@
+# Source credibility tiers used ONLY as one input to evidence weighting.
+# This is an editorial heuristic that YOU should review, not an objective truth table.
+# "unrated" means "not on this list", NOT "unreliable". The IFCN signatory list
+# (ifcncodeofprinciples.poynter.org) is a good reference for fact-checkers.
+tiers:
+  fact_checker:
+    - snopes.com
+    - politifact.com
+    - factcheck.org
+    - fullfact.org
+    - leadstories.com
+    - checkyourfact.com
+    - altnews.in
+    - boomlive.in
+    - newschecker.in
+    - vishvasnews.com
+    - factly.in
+    - afp.com
+    - factcheck.afp.com
+  wire_or_major:
+    - reuters.com
+    - apnews.com
+    - bbc.com
+    - bbc.co.uk
+    - thehindu.com
+    - indianexpress.com
+    - theguardian.com
+    - nytimes.com
+    - washingtonpost.com
+    - npr.org
+    - aljazeera.com
+official_suffixes: [".gov", ".gov.in", ".nic.in", ".gov.uk", ".edu", ".int"]

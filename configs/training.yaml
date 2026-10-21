@@ -1,0 +1,30 @@
+# Training configuration. Every value here is recorded in model metadata and MLflow.
+seed: 42
+data:
+  min_words: 20            # drop near-empty articles
+  val_size: 0.15
+  test_size: 0.15
+  remove_source_leaks: true   # strip "(Reuters) -", "21st Century Wire says", etc.
+features:
+  word_ngram_range: [1, 2]
+  word_max_features: 50000
+  char_ngram_range: [3, 4]
+  char_max_features: 30000
+  min_df: 5
+models:
+  logistic_regression: {C: 4.0, max_iter: 1000}
+  linear_svm: {C: 0.5}
+  random_forest: {enabled: false, n_estimators: 200, max_depth: null}
+selection_metric: f1_macro   # chosen on VALIDATION data only
+calibration:
+  method: sigmoid
+  max_ece_for_valid: 0.05    # confidence is only shown as "validated" if test ECE <= this
+confidence:
+  target_selective_accuracy: 0.95  # lowest threshold whose accepted predictions reach this on val
+  fallback_threshold: 0.75
+novelty:
+  svd_components: 128
+  max_features: 50000
+  k_neighbors: 5
+  max_reference_docs: 20000
+  threshold_percentile: 95   # of validation novelty scores; ~5% of in-distribution flagged by design

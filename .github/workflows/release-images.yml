@@ -1,0 +1,29 @@
+name: Release images
+
+# Publishes the two images to GitHub Container Registry when you push a tag like v0.1.0.
+# It only publishes images: it does NOT deploy to any server (see docs/DEPLOYMENT.md).
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      - name: Build and push
+        env:
+          TAG: ${{ github.ref_name }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          OWNER_LC=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+          docker build -t "ghcr.io/$OWNER_LC/verinews-backend:$TAG" .
+          docker build -t "ghcr.io/$OWNER_LC/verinews-frontend:$TAG" ./frontend
+          docker push "ghcr.io/$OWNER_LC/verinews-backend:$TAG"
+          docker push "ghcr.io/$OWNER_LC/verinews-frontend:$TAG"

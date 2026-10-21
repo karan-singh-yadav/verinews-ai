@@ -1,0 +1,57 @@
+# Production-style stack:  docker compose up -d --build
+# Train a model (needs data/raw/Fake.csv + True.csv):  docker compose --profile train run --rm trainer
+# MLflow UI (http://localhost:5000):                   docker compose --profile mlflow up -d mlflow
+name: verinews
+
+services:
+  backend:
+    build: .
+    image: verinews-backend
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Safe ONLY because the backend publishes no port: its sole client is the nginx container.
+      # Never set "*" if you also expose port 8000 to the internet.
+      FORWARDED_ALLOW_IPS: "*"
+    volumes:
+      - ./models:/app/models          # trained model versions (shared with the trainer)
+      - appdata:/app/data             # feedback + monitoring events (derived numbers only)
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    image: verinews-frontend
+    ports:
+      - "${WEB_PORT:-8080}:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+  trainer:
+    profiles: ["train"]
+    image: verinews-backend
+    build: .
+    command: python -m ml.training.train --dataset isot --data-dir /app/data/raw --output-dir /app/models
+    volumes:
+      - ./data/raw:/app/data/raw:ro
+      - ./models:/app/models
+      - mlruns:/app/mlruns
+
+  mlflow:
+    profiles: ["mlflow"]
+    image: verinews-backend
+    build: .
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:////app/mlruns/mlflow.db
+    ports:
+      - "127.0.0.1:5000:5000"          # localhost only: MLflow has no login
+    volumes:
+      - mlruns:/app/mlruns
+    restart: unless-stopped
+
+volumes:
+  appdata:
+  mlruns:

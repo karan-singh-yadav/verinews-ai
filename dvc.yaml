@@ -1,0 +1,17 @@
+# Reproducible training pipeline.  Usage: see docs/DVC.md
+stages:
+  train:
+    cmd: python -m ml.training.train --dataset isot --data-dir data/raw --output-dir models --version current --metrics-out metrics/train.json
+    deps:
+      - data/raw/Fake.csv
+      - data/raw/True.csv
+      - ml
+      - configs/training.yaml
+    params:
+      - configs/training.yaml:
+    outs:
+      - models/current
+      - models/ACTIVE
+    metrics:
+      - metrics/train.json:
+          cache: false

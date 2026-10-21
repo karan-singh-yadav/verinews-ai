@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0e1522;
+  --color-panel: #151f30;
+  --color-raised: #1b2840;
+  --color-line: #2a3b57;
+  --color-text: #e6ecf5;
+  --color-muted: #93a3bd;
+  /* ML readings use indigo on purpose: a model score is not a verdict. */
+  --color-model: #8ea2ff;
+  /* Verdict colours are reserved for the online-evidence assessment. */
+  --color-supported: #5ccba6;
+  --color-contradicted: #f2766c;
+  --color-mixed: #e8b94c;
+  --color-inconclusive: #a7b3d0;
+  /* Monitoring alerts (drift, warnings) use their own colour so they never read as a verdict. */
+  --color-alert: #f0a35e;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader Variable", Georgia, "Times New Roman", serif;
+}
+
+html { color-scheme: dark; }
+body { margin: 0; background: var(--color-ink); color: var(--color-text); font-family: var(--font-sans); }
+:focus-visible { outline: 2px solid var(--color-model); outline-offset: 2px; }
+::selection { background: #3a4f86; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
