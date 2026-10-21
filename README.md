@@ -13,6 +13,19 @@ A portfolio project that combines **machine learning**, **NLP**, **online resear
 > **The ML score is not proof of anything.** It reads writing style learned from one dataset. Online evidence is
 > assessed separately, and "no evidence found" is reported as *Inconclusive*, never as "fake".
 
+## Screenshots
+<img width="1352" height="629" alt="Screenshot (17)" src="https://github.com/user-attachments/assets/2578f241-341a-4153-8178-21deba448980" />
+<img width="1353" height="635" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/1efeda0e-4aec-47e4-899a-d6c7e11917c8" />
+<img width="1351" height="636" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/9c1ca421-d105-4fd7-87fd-d74d03cdc394" />
+<img width="1350" height="636" alt="Screenshot (20)" src="https://github.com/user-attachments/assets/a2a1efee-b2bd-4591-a07d-ecfc05579660" />
+<img width="1366" height="626" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/962ee8ee-f18f-4303-9aac-38613bb97cec" />
+<img width="1366" height="624" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/1c9c37e0-eae0-4f06-b737-6488842e0d48" />
+<img width="1366" height="640" alt="Screenshot (23)" src="https://github.com/user-attachments/assets/34483166-f0fd-4210-89ad-e1bc737f8e10" />
+<img width="1366" height="639" alt="Screenshot (24)" src="https://github.com/user-attachments/assets/038d49b8-feed-477d-acdf-f1430eaf85af" />
+<img width="1366" height="639" alt="Screenshot (25)" src="https://github.com/user-attachments/assets/42698f94-0638-43ba-bfc0-1116c5a1a474" />
+<img width="1366" height="640" alt="Screenshot (26)" src="https://github.com/user-attachments/assets/ddb4f0a3-13bb-4cfc-a7d6-1c2283d1f175" />
+
+
 ## Verification status (what was actually run)
 
 | Verified in the build environment | Result |
